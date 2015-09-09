@@ -2,13 +2,51 @@
 
 Allows generation of asset pipeline enabled Ghost theme development using Interface, a thin UI toolkit created by Create the Bridge.
 
-## Installation
+## Instalaltion - With Ghost Manager
 
 Coming soon
 
-## Commands
+## Installation - Without Ghost Manager
 
-Generate a theme in the current directory
+Generate ghost theme in current directory
+```
+yo ghost-interface
+```
+
+## Usage - With Ghost Manager
+
+Coming soon
+
+## Usage - Without Ghost Manager
+
+First, generate the theme directory using:
+```
+yo ghost-interface
+```
+
+Move into the generated theme directory:
+```
+cd {{theme name}}/
+```
+
+Install dependencies using npm:
+```
+npm install
+```
+
+Make sure the environemnt variable $GHOST_PATH is set to the install directory of ghost.
+For example, /Users/joshuat/Applications/Ghost <- Contains my ghost files. https://github.com/TryGhost/Ghost
+```
+GHOST_PATH=~/Applications/Ghost
+```
+
+Run the ghost server and watch for theme changes
+```
+gulp run
+```
+
+## Theme Commands
+
 ```
 yo ghost-interface
 ```
