@@ -6,22 +6,26 @@ Allows generation of asset pipeline enabled Ghost theme development using Interf
 
 Ghost Manager is a ruby gem which was created to simplify Ghost installations and theme development. See the github page to learn more about it and how to leverage its power. https://github.com/CreateTheBridge/ghost-manager
 
-## Instalaltion - With Ghost Manager
+## Instalaltion
+
+### With Ghost Manager
 
 Coming soon
 
-## Installation - Without Ghost Manager
+### Without Ghost Manager
 
 Generate ghost theme in current directory
 ```
 yo ghost-interface
 ```
 
-## Usage - With Ghost Manager
+## Usage
+
+### With Ghost Manager
 
 Coming soon
 
-## Usage - Without Ghost Manager
+### Without Ghost Manager
 
 First, generate the theme directory using:
 ```
