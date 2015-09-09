@@ -33,7 +33,6 @@ yo ghost-interface
 ```
 
 Copy theme folder into $GHOST_PATH/content/themes. To run the development server and use live reload, you'll need to develop from within a Ghost installation.
-Make sure the environment variable $GHOST_PATH is set to the install directory of ghost.
 ```
 cp -R {{ghost-theme-name}}/ $GHOST_PATH/content/themes/{{ghost-theme-name}} && cd $GHOST_PATH//content/themes/{{ghost-theme-name}}
 ```
