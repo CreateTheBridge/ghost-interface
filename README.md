@@ -55,10 +55,6 @@ gulp run
 
 ## Theme Commands
 
-```
-yo ghost-interface
-```
-
 Clears all compiled/minified assets
 ```
 gulp clean
