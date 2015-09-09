@@ -1,0 +1,37 @@
+{
+  "name": "generator-ghost-interface",
+  "version": "0.0.1",
+  "description": "Interface-based theme generator for Ghost Blogging Platform",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "CreateTheBridge/ghost-interface-generator",
+  "author": {
+    "name": "Joshua Tyree",
+    "email": "joshuat@createthebridge.com",
+    "url": "https://github.com/JoshuaTyree"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "~0.17.1",
+    "chalk": "~0.5.1",
+    "yosay": "^0.3.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}

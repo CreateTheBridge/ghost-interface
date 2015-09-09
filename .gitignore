@@ -1,0 +1,5 @@
+node_modules/
+temp/
+Gemfile.lock
+.DS_Store
+**/.DS_Store
