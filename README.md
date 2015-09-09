@@ -42,7 +42,7 @@ Install dependencies using npm:
 npm install
 ```
 
-Make sure the environemnt variable $GHOST_PATH is set to the install directory of ghost.
+Make sure the environment variable $GHOST_PATH is set to the install directory of ghost.
 For example, /Users/joshuat/Applications/Ghost <- Contains my ghost files. https://github.com/TryGhost/Ghost
 ```
 GHOST_PATH=~/Applications/Ghost
