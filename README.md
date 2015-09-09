@@ -2,6 +2,10 @@
 
 Allows generation of asset pipeline enabled Ghost theme development using Interface, a thin UI toolkit created by Create the Bridge.
 
+## Ghost Manager
+
+Ghost Manager is a ruby gem which was created to simplify Ghost installations and theme development. See the github page to learn more about it and how to leverage its power. https://github.com/CreateTheBridge/ghost-manager
+
 ## Instalaltion - With Ghost Manager
 
 Coming soon
