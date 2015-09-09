@@ -11,7 +11,7 @@ Coming soon
 Generate a theme in the current directory
 ```
 yo ghost-interface
-``
+```
 
 Clears all compiled/minified assets
 ```
