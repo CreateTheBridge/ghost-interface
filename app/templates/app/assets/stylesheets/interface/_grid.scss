@@ -1,0 +1,31 @@
+// Susy Default Grid
+$susy: (
+  flow: ltr,
+  math: fluid,
+  output: float,
+  gutter-position: after,
+  container: auto,
+  container-position: center,
+  columns: 12,
+  gutters: .25,
+  column-width: 70px,
+  global-box-sizing: border-box,
+  last-flow: to,
+  debug: (
+    image: hide,
+    color: rgba(#E74C3C, .25),
+    output: background,
+    toggle: top right,
+  ),
+  use-custom: (
+    background-image: true,
+    background-options: false,
+    box-sizing: true,
+    clearfix: false,
+    rem: true,
+  )
+);
+
+main {
+  overflow: hidden;
+}

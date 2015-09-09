@@ -5,21 +5,19 @@ var gulp = require('gulp'),
     exec = require('child_process').exec,
     plumber = require('gulp-plumber'),
     gutil = require('gulp-util'),
-    compass = require('gulp-compass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     clean = require('gulp-rimraf'),
-    concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload');
 
 
 // Set up Mincer directive processor
-var mincerEnv = new Mincer.Environment();
+var env = new Mincer.Environment();
 
 env.appendPath("source/assets/javascripts");
 env.appendPath("source/assets/stylesheets");
@@ -30,33 +28,43 @@ gulp.task("clean", function() {
     .pipe( clean() );
 });
 
-gulp.task("recompile-assets", function() {
-  return gulp.src("source/assets/**/application.*")
+gulp.task("build-javascripts", function() {
+  return gulp.src("source/assets/javascripts/application.*")
     .pipe( mince(env) )
-    .pipe( gulp.dest("assets") );
-});
-
-gulp.task("minify-css", function() {
-  return gulp.src("assets/stylesheets/*")
-    .pipe( autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4") )
-    .pipe( rename({ suffix: ".min" }) )
-    .pipe( minifycss() )
-    .pipe( notify({ message: "CSS minified successfully." }) );
-});
-
-gulp.task("minify-js", function() {
-  return gulp.src("assets/javascripts/*")
+    .pipe(
+      rename(function(path) {
+        var pieces = path.basename.split('.');
+        path.basename = pieces[0] + ".min";
+        path.extname = "." + pieces[1];
+      })
+    )
     .pipe( uglify() )
-    .pipe( rename({ suffix: ".min" }) )
-    .pipe( notify({ message: "JavaScript minified successfully." }) );
+    .pipe( gulp.dest("assets/javascripts") )
+    .pipe( notify({ message: "Javascripts built successfully" }) );
 });
 
-gulp.task("minify-images", function() {
+gulp.task("build-stylesheets", function() {
+  return gulp.src("source/assets/stylesheets/application.*")
+    .pipe( mince(env) )
+    .pipe(
+      rename(function(path) {
+        var pieces = path.basename.split('.');
+        path.basename = pieces[0] + ".min";
+        path.extname = "." + pieces[1];
+      })
+    )
+    .pipe( minifycss() )
+    .pipe( gulp.dest("assets/stylesheets") )
+    .pipe( notify({ message: "Stylesheets built successfully" }) );
+});
+
+gulp.task("optimize-images", function() {
   return gulp.src("source/assets/images/*")
     .pipe( cache( imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }) ) )
     .pipe( gulp.dest("assets/images") )
-    .pipe( notify({ message: "Images minifed successfully" }) );
+    .pipe( notify({ message: "Images optimized successfully" }) );
 });
+
 
 gulp.task('generate-favicon', function () {
     (exec('cd source/assets/images/; ruby favicon_maker.rb'));
@@ -75,13 +83,13 @@ gulp.task("templates", function() {
 
 gulp.task("watch", function() {
   // Watch stylesheets
-  gulp.watch("source/assets/stylesheets/*", ['recompile-assets', 'minify-css']);
+  gulp.watch("source/assets/stylesheets/*", ["build-stylesheets"]);
 
   // Watch scripts
-  gulp.watch("source/assets/javascripts/*", ['recompile-assets', 'minify-js']);
+  gulp.watch("source/assets/javascripts/*", ["build-javascripts"]);
 
   // Watch images
-  gulp.watch("source/assets/images/*", ['minify-images']);
+  gulp.watch("source/assets/images/*", ["optimize-images"]);
 
   // Watch .hbs files
   gulp.watch("*.hbs", ['templates']);
@@ -94,7 +102,7 @@ gulp.task("watch", function() {
 });
 
 gulp.task("ghost-server", function () {
-  exec("cd $GHOST_PATH; npm start");
+  (exec("cd ../../../; npm start"));
 });
 
 gulp.task("run", function() {
@@ -102,5 +110,5 @@ gulp.task("run", function() {
 });
 
 gulp.task("default", ['clean'], function() {
-  gulp.start('recompile-assets', 'minify-css', 'minify-js', 'minify-images', 'generate-favicon');
+  gulp.start("build-stylesheets", "build-javascripts");
 });

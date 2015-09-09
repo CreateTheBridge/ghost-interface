@@ -1,0 +1,53 @@
+// Sidebar
+%sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  background: $sidebar-background-color;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+nav.sidebar-container {
+  @media only screen and (max-width: 1024px) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.sidebar {
+  @extend %sidebar;
+
+  li {
+    font-size: $ms-base;
+    font-family: $font-family;
+    font-weight: $font-weight;
+    color: $font-color;
+
+    &:hover {
+      background-color: scale_color($sidebar-background-color, $lightness: 3%) ;
+    }
+
+    &.active {
+      background-color: scale_color($sidebar-background-color, $lightness: 3%);
+    }
+
+    a {
+      margin: 0;
+      padding: 1.5em 1.5em;
+      display: block;
+      color: $sidebar-color;
+
+      &:hover {
+        color: $sidebar-color-hover;
+      }
+
+      &.active {
+        color: $sidebar-color-active;
+      }
+    }
+  }
+}

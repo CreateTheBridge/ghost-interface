@@ -1,0 +1,42 @@
+// It strips the unit of measure and returns it
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+// Converts value to rem
+@function rem-calc($value, $base-value: $base-font-size)  {
+  $value: strip-unit($value) / strip-unit($base-value) * 1rem;
+
+  @if ($value == 0rem) {
+    $value: 0;
+  }
+  @return $value;
+}
+
+// Calculate line height
+@function line-height($font-size: $base-font-size, $line-height: $base-line-height) {
+  @return (strip-unit($line-height) / strip-unit($font-size)) * 1rem;
+}
+
+
+// Leading adjusted for borders
+@function adjust-leading($leading: $base-line-height, $operator: 'subtract', $value: 1px) {
+  $from-unit: unit($leading);
+  $px-leading: $leading;
+
+  @if $leading != 'px' {
+    @if $from-unit == 'em' {
+      $px-leading: $leading * $base-font-size / 1em
+    } @else if $from-unit == 'rem' {
+      $px-leading: $leading * $base-font-size / 1rem
+    }
+  }
+
+  @if $operator == 'subtract' {
+    $leading: (strip-unit($px-leading) - strip-unit($value)) / strip-unit($base-font-size) * 1em;
+  } @else if 'add' {
+    $leading: (strip-unit($px-leading) + strip-unit($value)) / strip-unit($base-font-size) * 1em;
+  }
+
+  @return $leading;
+}

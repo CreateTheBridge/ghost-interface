@@ -1,0 +1,24 @@
+%state {
+  width: 10em;
+  padding: 0.5em 0;
+  font-weighT: 600;
+  font-size: 0.875em;
+  color: $state-color;
+  border-radius: $round-edges;
+  text-align: center;
+}
+
+li.state-green  {
+  @extend %state;
+  background-color: $state-green-background-color;
+}
+
+li.state-yellow {
+  @extend %state;
+  background: $state-yellow-background-color;
+}
+
+li.state-red {
+  @extend %state;
+  background: $state-red-background-color;
+}

@@ -1,0 +1,56 @@
+// Hoverable area for dropdown
+%drop-down {
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    color: $dropdown-color-hover;
+  }
+}
+
+// Dropdown list
+%drop-down-list {
+  display: none;
+  position: absolute;
+  top: 50%;
+
+  > * {
+    padding: 0.25em;
+    width: 10rem;
+    color: $dropdown-color;
+    background-color: $dropdown-background-color;
+    text-align: center;
+
+    &:hover {
+      color: $dropdown-color-hover;
+      background-color: scale_color($dropdown-background-color, $lightness: 5%);
+    }
+  }
+
+  * {
+    &:first-of-type {
+      border-radius: $round-edges $round-edges 0 0;
+    }
+
+    &:last-of-type {
+      border-radius: 0 0 $round-edges $round-edges;
+    }
+  }
+}
+
+.drop-down {
+  @extend %drop-down;
+
+  &:hover {
+    .drop-down-list {
+      padding-top: 1em;
+      display: block;
+      z-index: 100;
+    }
+  }
+}
+
+.drop-down-list {
+  @extend %drop-down-list;
+}
+

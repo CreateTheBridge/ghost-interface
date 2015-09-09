@@ -2,6 +2,10 @@
   "name": "<%= themeName %>",
   "version": "0.0.1",
   "dependencies": {
-      "font-awesome": "FortAwesome/Font-Awesome"
+    "compass-mixins": "~1.0.2",
+    "font-awesome": "FortAwesome/Font-Awesome",
+    "modular-scale": "~2.1.1",
+    "normalize-css": "normalize.css#~3.0.3",
+    "susy": "~2.2.6"
   }
 }

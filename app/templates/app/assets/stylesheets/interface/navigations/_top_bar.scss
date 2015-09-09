@@ -1,0 +1,60 @@
+// Top bar
+nav.top-bar-container {
+  padding: 1.5em;
+  color: $topbar-color;
+  background-color: $topbar-background-color;
+
+  .top-bar {
+    display: inline-block;
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+    float: right;
+    z-index: 100;
+  }
+}
+
+// Hoverable area for dropdown
+.hover-menu {
+  @extend %drop-down;
+
+  i {
+    padding: 0 0.5em;
+    color: $topbar-color;
+  }
+
+  &:hover {
+    i {
+      color: $topbar-color-hover;
+    }
+
+    .hover-menu-list {
+      padding-top: 2em;
+      display: block;
+      top: 1.25em;
+      right: 0;
+    }
+  }
+
+  li {
+    width: 14rem;
+    color: $topbar-color;
+    background-color: $topbar-background-color;
+
+    &:hover {
+      color: $topbar-color-hover;
+      background-color: scale_color($topbar-background-color, $lightness: 5%);
+    }
+  }
+}
+
+// Dropdown list
+.hover-menu-list {
+  @extend %drop-down-list;
+
+  a {
+    padding: 0.5em;
+    display: block;
+    color: $topbar-color;
+  }
+}

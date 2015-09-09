@@ -1,0 +1,79 @@
+footer {
+  padding: 0 1em;
+  background-color: $dark-gray;
+
+  .site-map {
+    @include container(100em);
+    padding: 2.25em 0 adjust-leading(2.25em) 0;
+    border-bottom: 1px solid $light-gray;
+
+    ul {
+      float: left;
+    }
+
+    li {
+      display: inline-block;
+      margin-right: 3em;
+
+      &:nth-of-type(5) a {
+        color: $dark-blue;
+      }
+    }
+
+    .contact {
+      float: right;
+      color: white;
+
+      a {
+        font-weight: 400;
+      }
+    }
+  }
+
+  .copyright {
+    @include container(100em);
+    padding: 1.5em 0;
+
+    p {
+      margin: 0;
+      color: white;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .site-map {
+      li {
+        margin-bottom: 1.5em;
+        display: block;
+        text-align: left;
+      }
+
+      .contact {
+        text-align: left;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 800px) {
+    .site-map {
+      li {
+        margin: 0 0.75em;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .site-map {
+      text-align: center;
+
+      ul {
+        float: none;
+        margin-bottom: 1.5em;
+      }
+
+      .contact {
+        float: none;
+      }
+    }
+  }
+}

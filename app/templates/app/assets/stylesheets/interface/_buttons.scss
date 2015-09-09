@@ -1,0 +1,25 @@
+// Buttons
+%button {
+  padding: 0.9em 2em;
+  display: inline-block;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  color: $button-color;
+  background-color: $button-background-color;
+  border: $button-border $button-border-color;
+  border-radius: $round-edges;
+  transition: background-color 300ms ease-out;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    color: $button-color-hover;
+    background-color: $button-background-color-hover;
+    border: $button-border-color-hover;
+  }
+}
+
+.button, input[type="submit"] {
+  @extend %button;
+}

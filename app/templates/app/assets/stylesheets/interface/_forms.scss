@@ -1,0 +1,72 @@
+// Forms
+%input {
+  margin: 0.425em 0;
+  padding: 0.45em;
+  display: block;
+  color: $form-color;
+  background-color: $form-background-color;
+  border: 1px solid $form-border-color;
+  box-shadow: $form-box-shadow;
+  border-radius: $round-edges;
+  outline: none;
+
+  &:hover {
+    border: 1px solid $form-border-color-hover;
+  }
+
+  &:focus {
+    box-shadow: $form-box-shadow;
+    background-color: $form-background-color-focus;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $placeholder-text-color;
+  }
+
+  &:-moz-placeholder {
+    color: $placeholder-text-color;
+  }
+
+  &::-moz-placeholder {
+    color: $placeholder-text-color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $placeholder-text-color;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="color"],
+select,
+textarea {
+  @extend %input;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  margin-right: 1em;
+}
+
+label {
+  display: block;
+  font-weight: $label-weight;
+  font-size: rem-calc(15);
+  color: $label-color;
+
+  abbr {
+    display: none;
+  }
+}

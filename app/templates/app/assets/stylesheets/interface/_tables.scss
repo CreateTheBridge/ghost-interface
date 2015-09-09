@@ -1,0 +1,33 @@
+// Tables
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  padding: 0.7em 3em;
+  color: $table-header-color;
+  border-bottom: 2px solid $gray;
+  text-align: left;
+  font-family: $header-font-family;
+  font-weight: 600;
+}
+
+td {
+  padding: 1.5em 3em;
+  color: $table-color;
+  text-align: left;
+}
+
+tr {
+  &:nth-child(odd) {
+    background-color: $table-odd-background-color;
+  }
+
+  &:nth-child(even) {
+    background-color: $table-even-background-color;
+  }
+}
+
+
+

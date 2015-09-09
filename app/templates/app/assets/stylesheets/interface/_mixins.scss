@@ -1,0 +1,19 @@
+// Button Mixin
+@mixin button($button-color, $button-background-color) {
+  color: $button-color;
+  background-color: $button-background-color;
+
+  &:hover {
+    color: scale_color($button-color, $lightness: -20%);
+    background-color: scale_color($button-background-color, $lightness: -20%);
+  }
+}
+
+// Icon Mixin
+@mixin icon($icon-color, $icon-color-hover) {
+  color: $icon-color;
+
+  &:hover {
+    color: $icon-color-hover;
+  }
+}

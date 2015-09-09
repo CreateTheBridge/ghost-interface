@@ -1,0 +1,37 @@
+// Lists
+ul, ol, dl {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  outline: none;
+}
+
+li {
+  display: block;
+}
+
+dl {
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.index-container {
+  .list-item {
+    padding: 1em 0;
+    background-color: $list-item-background-color;
+
+    &:nth-child(even) {
+      background-color: $list-item-background-color-odd;
+    }
+  }
+
+  .button {
+    @extend %button;
+    margin-right: 1em;
+  }
+}

@@ -1,0 +1,117 @@
+// Establish Baseline
+html {
+  font-size: ($base-font-size / 16px) * 100%;
+}
+
+body {
+  line-height: line-height();
+}
+
+// Links
+a {
+  font-family: $header-font-family;
+  font-weight: 700;
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-color-hover;
+  }
+
+  &.active {
+    color: $link-color-active;
+  }
+}
+
+// Typographic Tags
+body {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  color: $font-color;
+  background-color: $body-background-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: $header-font-family;
+  font-weight: $header-font-weight;
+  color: $header-font-color;
+}
+
+p {
+  margin: 1.5rem 0;
+  font-family: $font-family;
+  font-weight: $font-weight;
+  color: $font-color;
+}
+
+hr {
+  border-bottom: 1px solid $border-color;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+blockquote {
+  margin: 1em 0;
+  padding: 0.5em 0 0.5em 1em;
+  color: scale_color($font-color, $lightness: 15%);
+  border-left: 3px solid $border-color;
+}
+
+cite {
+  font-style: italic;
+  color: scale_color($font-color, $lightness: 30%);
+
+  &:before {
+    content: '\2014 \00A0';
+  }
+}
+
+// Modular Scale
+$typographic-element: (
+  h1: (
+    $ms-up-3,
+    $ms-small-up-3
+  ),
+
+  h2: (
+    $ms-up-2,
+    $ms-small-up-2
+  ),
+
+  h3: (
+    $ms-up-1
+    $ms-small-up-1
+  ),
+
+  h4: (
+    $ms-up,
+    $ms-small-up
+  ),
+
+  h5: (
+    $ms-base,
+    $ms-base
+  ),
+
+  h6: (
+    $ms-down,
+    $ms-small-down
+  ),
+
+  p: (
+    $ms-base,
+    $ms-small-base
+  ),
+);
+
+@each $element, $size in $typographic-element {
+  #{$element} {
+    @include adjust-font-size-to( nth($size, 1) );
+
+    @media only screen and (max-width: 1024px) {
+      @include adjust-font-size-to( nth($size, 2) );
+    }
+  }
+}

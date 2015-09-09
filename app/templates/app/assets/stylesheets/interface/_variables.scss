@@ -1,0 +1,156 @@
+// Colors
+$off-white: #f1f1f1;
+$gray: #ccc;
+$light-blue: #3598dc;
+$light-green: #2ab292;
+$light-gray: #999;
+$medium-gray: #666;
+$dark-gray: #333;
+$dark-blue: #22313F;
+$green: #3FC380;
+$red: #D24D57;
+$yellow: #f1c205;
+$orange: #f08a24;
+
+// Backgrounds
+$body-background-color: white;
+
+
+// Typography
+$base-font-size: 16px;
+$base-small-font-size: 15px;
+$base-line-height: 24px;
+
+$ms-base: $base-font-size;
+$ms-small-base: $base-small-font-size;
+
+$ms-ratio: $augmented-fourth;
+$ms-small-ratio: $major-third;
+
+$ms-up-3: ms(4);
+$ms-up-2: ms(3);
+$ms-up-1: ms(2);
+$ms-up:   ms(1);
+$ms-0: $ms-base;
+$ms-down: ms(-1);
+
+$ms-small-up-3: ms(4, $ms-base, $ms-small-ratio);
+$ms-small-up-2: ms(3, $ms-base, $ms-small-ratio);
+$ms-small-up-1: ms(2, $ms-base, $ms-small-ratio);
+$ms-small-up:   ms(1, $ms-base, $ms-small-ratio);
+$ms-0: $ms-base;
+$ms-small-down:  ms(-1);
+
+$font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$font-weight: normal;
+$font-color: $medium-gray;
+$header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$header-font-weight: normal;
+$header-font-color: $dark-gray;
+
+
+// Buttons
+$button-font-size: rem-calc(14);
+$button-font-weight: $font-weight;
+$button-background-color: $light-green;
+$button-background-color-hover: scale_color($button-background-color, $lightness: -20%);
+$button-border: none;
+$button-border-color: none;
+$button-border-color-hover: none;
+$button-color: white;
+$button-color-hover: white;
+
+
+// Links
+$link-color: $light-blue;
+$link-color-hover: scale_color($link-color, $lightness: -20%);
+$link-color-active: $dark-blue;
+
+
+// Forms
+$label-weight: 200;
+$label-color: $dark-gray;
+$form-color: $medium-gray;
+$form-background-color: white;
+$form-background-color-focus: $off-white;
+$form-box-shadow: none;
+$form-border-color: #ccc;
+$form-border-color-hover: scale_color($form-border-color, $lightness: -20%);
+$placeholder-text-color: $light-gray;
+
+
+// Tables
+$table-header-color: $dark-gray;
+$table-color: $medium-gray;
+$table-odd-background-color: white;
+$table-even-background-color: $light-gray;
+
+
+// Lists
+$list-item-background-color: white;
+$list-item-background-color-odd: scale_color($list-item-background-color, $lightness: -3%);
+
+
+// Borders
+$round-edges: rem-calc(5);
+$border-color: $light-green;
+
+
+// Flashes
+$alert-background-color: $red;
+$alert-border-color: $alert-background-color;
+$success-background-color: $green;
+$success-border-color: $success-background-color;
+$warning-background-color: $orange;
+$warning-border-color: $warning-background-color;
+$close-color: white;
+
+
+// States
+$state-color: white;
+$state-green-background-color: $green;
+$state-yellow-background-color: $yellow;
+$state-red-background-color: $red;
+
+
+// Icons
+$icon-color: $gray;
+$icon-color-hover: scale_color($icon-color, $lightness: -20%);
+
+
+// Navigations
+$use-sidebar: false;
+$use-thin-sidebar: true;
+
+$sidebar-width: rem-calc(260);
+$sidebar-background-color: $dark-blue;
+$sidebar-color: white;
+$sidebar-color-hover: scale_color($sidebar-color, $lightness: -20%);
+$sidebar-color-active: scale_color($sidebar-color, $lightness: -30%);
+
+$thin-icon-font-size: rem-calc(21);
+$thin-sidebar-width: rem-calc(80);
+$thin-sidebar-background-color: $dark-blue;
+$thin-sidebar-color: white;
+$thin-sidebar-color-hover: scale_color($thin-sidebar-color, $lightness: -20%);
+$thin-sidebar-color-active: scale_color($thin-sidebar-color, $lightness: -30%);
+
+$topbar-background-color: $dark-blue;
+$topbar-color: white;
+$topbar-color-hover: scale_color($topbar-color, $lightness: -20%);
+$topbar-color-active: scale_color($thin-sidebar-color, $lightness: -30%);
+
+
+// Plans
+$plan-title-font-size: $ms-up;
+$plan-price-font-size: $ms-up-3;
+$plan-background-color: $dark-blue;
+$plan-title-background-color: $dark-blue;
+$plan-price-background-color: scale_color($plan-background-color, $lightness: 5%);
+$plan-color: white;
+
+
+// Dropdowns
+$dropdown-background-color: $dark-blue;
+$dropdown-color: white;
+$dropdown-color-hover: scale_color($dropdown-color, $lightness: -20%);

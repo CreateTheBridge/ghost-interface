@@ -1,0 +1,16 @@
+@import 'sidebar';
+@import 'thin_sidebar';
+@import 'top_bar';
+
+
+// Remove padding-left when sidebars not visible
+@media only screen and (min-width: 1024px) {
+  main {
+    @if $use-sidebar == true {
+        padding-left: $sidebar-width;
+    }
+    @if $use-thin-sidebar == true {
+        padding-left: $thin-sidebar-width;
+    }
+  }
+}

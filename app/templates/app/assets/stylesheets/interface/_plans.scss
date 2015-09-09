@@ -1,0 +1,52 @@
+// Plans
+%plan {
+  ul {
+    background-color: $plan-background-color;
+    color: $plan-color;
+    text-align: center;
+    border-radius: $round-edges;
+  }
+
+  .title {
+    padding: 1rem 0;
+    background-color: $plan-title-background-color;
+    font-size: $plan-title-font-size;
+    border-radius: $round-edges;
+  }
+
+  .price {
+    padding: 1.5rem 0;
+    font-size: $plan-price-font-size;
+    background-color: $plan-price-background-color;
+
+    span {
+      font-size: 1.25rem;
+      font-weight: 100;
+
+      &.money-symbol {
+        position: relative;
+        top: -1.7em;
+        right: -0.8em;
+      }
+
+      &.month-text {
+        position: relative;
+        left: -0.8em;
+      }
+    }
+  }
+
+  .feature {
+    padding: 0.75em 0;
+  }
+
+  .button {
+    @extend %button;
+    margin: 1.2em 0 1.6em 0;
+  }
+}
+
+.plan {
+  @extend %plan;
+  width: 20em;
+}

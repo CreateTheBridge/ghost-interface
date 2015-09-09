@@ -1,0 +1,29 @@
+.alert-box {
+  margin-bottom: 0;
+  display: none;
+
+  &.alert {
+    background-color: $alert-background-color;
+    border: 1px solid $alert-border-color;
+  }
+
+  &.success {
+    background-color: $success-background-color;
+    border: 1px solid $success-border-color;
+  }
+
+  &.warning {
+    background-color: $warning-background-color;
+    border: 1px solid $warning-border-color;
+  }
+
+  .alert-box-content {
+    opacity: 0.0;
+  }
+
+  .close-button {
+    color: $close-color;
+    opacity: 0.6;
+  }
+
+}

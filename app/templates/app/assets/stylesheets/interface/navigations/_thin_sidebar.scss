@@ -1,0 +1,50 @@
+// Thin Sidebar
+%thin-sidebar  {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $thin-sidebar-width;
+  background: $thin-sidebar-background-color;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+nav.thin-sidebar-container {
+  @media only screen and (max-width: 1024px) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.thin-sidebar {
+  @extend %thin-sidebar;
+
+  li {
+
+    &:hover {
+      background-color: scale_color($thin-sidebar-background-color, $lightness: 5%);
+    }
+
+    &.active {
+      background-color: scale_color($thin-sidebar-background-color, $lightness: 5%);
+    }
+
+    i {
+      padding: 1.2em 1em;
+      display: block;
+      font-size: $thin-icon-font-size;
+      color: $thin-sidebar-color;
+      text-align: center;
+
+      &:hover {
+        color: $thin-sidebar-color-hover;
+      }
+
+      &.active {
+        color: $thin-sidebar-color-active;
+      }
+    }
+  }
+}
