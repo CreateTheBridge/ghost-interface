@@ -32,20 +32,15 @@ First, generate the theme directory using:
 yo ghost-interface
 ```
 
-Move into the generated theme directory:
-```
-cd {{theme name}}/
-```
-
-Install dependencies using npm:
-```
-npm install
-```
-
 Copy theme folder into $GHOST_PATH/content/themes. To run the development server and use live reload, you'll need to develop from within a Ghost installation.
 Make sure the environment variable $GHOST_PATH is set to the install directory of ghost.
 ```
 cp -R {{ghost-theme-name}}/ $GHOST_PATH/content/themes/{{ghost-theme-name}} && cd $GHOST_PATH//content/themes/{{ghost-theme-name}}
+```
+
+Install required development dependencies
+```
+npm install
 ```
 
 Run the ghost server and watch for theme changes
