@@ -42,10 +42,10 @@ Install dependencies using npm:
 npm install
 ```
 
+Copy theme folder into $GHOST_PATH/content/themes. To run the development server and use live reload, you'll need to develop from within a Ghost installation.
 Make sure the environment variable $GHOST_PATH is set to the install directory of ghost.
-For example, /Users/joshuat/Applications/Ghost <- Contains my ghost files. https://github.com/TryGhost/Ghost
 ```
-GHOST_PATH=~/Applications/Ghost
+cp -R {{ghost-theme-name}}/ $GHOST_PATH/content/themes/{{ghost-theme-name}} && cd $GHOST_PATH//content/themes/{{ghost-theme-name}}
 ```
 
 Run the ghost server and watch for theme changes
@@ -60,24 +60,19 @@ Clears all compiled/minified assets
 gulp clean
 ```
 
-Generates assets
+Build stylesheet assets
 ```
-gulp recompile-assets
-```
-
-Minify JS
-```
-gulp minify-js
+gulp build-stylesheets
 ```
 
-Minify CSS
+Build javascript assets
 ```
-gulp minify-css
+gulp build-javascripts
 ```
 
 Optimize Images/SVGs
 ```
-gulp minify-images
+gulp optimize-images
 ```
 
 Generate Favicon
