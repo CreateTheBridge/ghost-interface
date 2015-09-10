@@ -19,6 +19,11 @@ Generate ghost theme in current directory
 yo ghost-interface
 ```
 
+Optionally, you can pass the name of the theme directly to the command line
+```
+yo ghost-interface {{theme-name}}
+```
+
 ## Usage
 
 ### With Ghost Manager
