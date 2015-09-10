@@ -6,6 +6,12 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 
 var GhostInterfaceGenerator = yeoman.generators.Base.extend({
+  constructor: function() {
+    yeoman.generators.Base.apply(this, arguments);
+
+    this.argument('themeName', { type: String, required: false });
+  },
+
   init: function () {
     this.pkg = require('../package.json');
 
@@ -19,25 +25,27 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
   },
 
   askFor: function () {
-    var done = this.async();
+    if (this.themeName == undefined || this.themeName == null || this.themeName == '') {
+      var done = this.async();
 
-    // Have Yeoman greet the user.
-    this.log(this.yeoman);
+      // Have Yeoman greet the user.
+      this.log(this.yeoman);
 
-    // replace it with a short and sweet description of your generator
-    this.log(chalk.magenta('Welcome to the Ghost Interface generator from Create the Bridge!'));
+      // replace it with a short and sweet description of your generator
+      this.log(chalk.magenta('Welcome to the Ghost Interface generator from Create the Bridge!'));
 
-    var prompts = [{
-      name: 'themeName',
-      message: 'What do you want to call your theme?',
-      default: 'new-ghost-theme'
-    }];
+      var prompts = [{
+        name: 'themeName',
+        message: 'What do you want to call your theme?',
+        default: 'new-ghost-theme'
+      }];
 
-    this.prompt(prompts, function (props) {
-      this.themeName = props.themeName;
+      this.prompt(prompts, function (props) {
+        this.themeName = props.themeName;
 
-      done();
-    }.bind(this));
+        done();
+      }.bind(this));
+    }
   },
 
   app: function () {
