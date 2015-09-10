@@ -23,9 +23,7 @@ var env = new Mincer.Environment();
 env.appendPath("source/assets/javascripts");
 env.appendPath("source/assets/stylesheets");
 
-var argv = yargs.argv;
-gutil.log(argv);
-
+var argv = yargs.argv;\
 
 gulp.task("clean", function() {
   return gulp.src(["assets/stylesheets/*", "assets/javascripts/*", "assets/images"], { read: false })
@@ -98,44 +96,38 @@ gulp.task("templates-no-reload", function() {
 });
 
 gulp.task("watch", function() {
-  if (argv.path != undefined && argv.path != null && argv.path != '') {
-    gulp.watch([
-      "source/**/*.hbs",
-      "source/assets/stylesheets/**/*.scss",
-      "source/assets/stylesheets/**/*.sass",
-      "source/assets/javascripts/**/*.coffee",
-      "source/assets/javascripts/**/*.js",
-      "source/assets/images/*"
-    ]).on("change", function(file) {
+  // Watch stylesheets
+  gulp.watch("source/assets/stylesheets/*", ["build-stylesheets"]);
+
+  // Watch scripts
+  gulp.watch("source/assets/javascripts/*", ["build-javascripts"]);
+
+  // Watch images
+  gulp.watch("source/assets/images/*", ["optimize-images"]);
+
+  // Watch .hbs files
+  gulp.watch("source/**/*.hbs", ['templates']);
+
+  var server = livereload();
+  gulp.watch(["assets/**", "**/*.hbs"]).on("change", function(file) {
+    server.changed(file.path);
+    if (argv.path != undefined && argv.path != null && argv.path != '') {
       var filename = file.path.replace(/^.*[\\\/]/, '')
       var message = "Syncing " + filename + " - " + file.type;
       gutil.log( gutil.colors.green(message) );
 
-      gulp.src("source/**/*")
+      gulp.src(["assets/**", "**/*.hbs"])
         .pipe( gulp.dest(argv.path) );
-    });
-  } else {
-    // Watch stylesheets
-    gulp.watch("source/assets/stylesheets/*", ["build-stylesheets"]);
-
-    // Watch scripts
-    gulp.watch("source/assets/javascripts/*", ["build-javascripts"]);
-
-    // Watch images
-    gulp.watch("source/assets/images/*", ["optimize-images"]);
-
-    // Watch .hbs files
-    gulp.watch("source/**/*.hbs", ['templates']);
-
-    var server = livereload();
-    gulp.watch("assets/**").on("change", function(file) {
-      server.changed(file.path);
-    });
-  }
+    }
+  });
 });
 
 gulp.task("ghost-server", function () {
-  (exec("cd ../../../; npm start"));
+  if (argv.ghost != undefined && argv.ghost != null && argv.ghost != '') {
+    (exec("cd " + argv.ghost + "; npm start"));
+  } else {
+    (exec("cd ../../../; npm start"));
+  }
 });
 
 gulp.task("run", function() {
