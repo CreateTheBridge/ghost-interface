@@ -14,19 +14,34 @@ var gulp = require('gulp'),
     clean = require('gulp-rimraf'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
+    rsync = require('gulp-rsync'),
     livereload = require('gulp-livereload');
 
 
 // Set up Mincer directive processor
 var env = new Mincer.Environment();
-
 env.appendPath("source/assets/javascripts");
 env.appendPath("source/assets/stylesheets");
 
 var argv = yargs.argv;
 
+// Set up the server path
+var server_path = "../../../";
+if (argv.ghost != undefined && argv.ghost != null && argv.path != '') {
+  server_path = argv.ghost;
+}
+
+// Set up the path we're dropping build files in when we're done
+var sync_destination = __dirname;
+if (argv.path != undefined && argv.path != null && argv.path != '') {
+  sync_destination = argv.path;
+}
+
+gutil.log(sync_destination);
+
+
 gulp.task("clean", function() {
-  return gulp.src(["assets/stylesheets/*", "assets/javascripts/*", "assets/images"], { read: false })
+  return gulp.src("build")
     .pipe( clean() );
 });
 
@@ -41,8 +56,7 @@ gulp.task("build-javascripts", function() {
       })
     )
     .pipe( uglify() )
-    .pipe( gulp.dest("assets/javascripts") )
-    .pipe( notify({ message: "Javascripts built successfully" }) );
+    .pipe( gulp.dest("build/assets/javascripts") );
 });
 
 gulp.task("build-stylesheets", function() {
@@ -56,84 +70,30 @@ gulp.task("build-stylesheets", function() {
       })
     )
     .pipe( minifycss() )
-    .pipe( gulp.dest("assets/stylesheets") )
-    .pipe( notify({ message: "Stylesheets built successfully" }) );
+    .pipe( gulp.dest("build/assets/stylesheets") );
 });
 
-gulp.task("optimize-images", function() {
-  return gulp.src("source/assets/images/*")
-    .pipe( cache( imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }) ) )
-    .pipe( gulp.dest("assets/images") )
-    .pipe( notify({ message: "Images optimized successfully" }) );
-});
-
-
-gulp.task('generate-favicon', function () {
-    (exec('cd source/assets/images/; ruby favicon_maker.rb'));
-});
-
-gulp.task("templates", function() {
+gulp.task("build-templates", function() {
   return gulp.src("source/**/*.hbs")
-    .pipe(
-      plumber( function(error) {
-        gutil.log( gutil.colors.red(error.message) );
-        this.emit( "end" );
-      })
-    )
-    .pipe( gulp.dest("./") )
-    .pipe( livereload() );
+    .pipe( gulp.dest("build") );
 });
 
-gulp.task("templates-no-reload", function() {
-  return gulp.src("source/**/*.hbs")
-    .pipe(
-      plumber( function(error) {
-        gutil.log( gutil.colors.red(error.message) );
-        this.emit( "end" );
-      })
-    )
-    .pipe( gulp.dest("./") );
+gulp.task("rebuild", ["build-javascripts", "build-stylesheets", "build-templates"], function() {
+  return gulp.src("build/**")
+    .pipe( rsync({ root: 'build', destination: sync_destination }) );
+});
+
+gulp.task("server", ["rebuild", "watch"], function() {
+  exec("cd " + server_path + "; npm start");
 });
 
 gulp.task("watch", function() {
-  // Watch stylesheets
-  gulp.watch("source/assets/stylesheets/*", ["build-stylesheets"]);
-
-  // Watch scripts
-  gulp.watch("source/assets/javascripts/*", ["build-javascripts"]);
-
-  // Watch images
-  gulp.watch("source/assets/images/*", ["optimize-images"]);
-
-  // Watch .hbs files
-  gulp.watch("source/**/*.hbs", ['templates']);
-
-  var server = livereload();
-  gulp.watch(["assets/**", "**/*.hbs"]).on("change", function(file) {
-    server.changed(file.path);
-    if (argv.path != undefined && argv.path != null && argv.path != '') {
-      var filename = file.path.replace(/^.*[\\\/]/, '')
-      var message = "Syncing " + filename + " - " + file.type;
-      gutil.log( gutil.colors.green(message) );
-
-      gulp.src(["assets/**", "**/*.hbs"])
-        .pipe( gulp.dest(argv.path) );
-    }
-  });
+  gulp.watch([
+    "source/assets/**",
+    "source/views/**"
+  ], ["rebuild"]);
 });
 
-gulp.task("ghost-server", function () {
-  if (argv.ghost != undefined && argv.ghost != null && argv.ghost != '') {
-    (exec("cd " + argv.ghost + "; npm start"));
-  } else {
-    (exec("cd ../../../; npm start"));
-  }
-});
-
-gulp.task("run", function() {
-  gulp.start("ghost-server", "watch");
-});
-
-gulp.task("default", ['clean'], function() {
-  gulp.start("build-stylesheets", "build-javascripts", "templates-no-reload");
+gulp.task("default", function() {
+  gulp.start("rebuild");
 });

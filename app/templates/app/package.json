@@ -19,6 +19,7 @@
       "gulp-uglify": "^0.3.1",
       "gulp-util": "^3.0.0",
       "gulp-mincer": "^0.0.2",
+      "gulp-rsync": "^0.0.5",
       "yargs": "3.24.0"
   }
 }
