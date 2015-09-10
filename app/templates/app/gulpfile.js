@@ -1,5 +1,6 @@
 // Load plugins
 var gulp = require('gulp'),
+    yargs = require('yargs'),
     Mincer = require('mincer'),
     mince = require('gulp-mincer'),
     exec = require('child_process').exec,
@@ -21,6 +22,9 @@ var env = new Mincer.Environment();
 
 env.appendPath("source/assets/javascripts");
 env.appendPath("source/assets/stylesheets");
+
+var argv = yargs.argv;
+gutil.log(argv);
 
 
 gulp.task("clean", function() {
@@ -71,34 +75,63 @@ gulp.task('generate-favicon', function () {
 });
 
 gulp.task("templates", function() {
-  return gup.src("*.hbs")
+  return gulp.src("source/**/*.hbs")
     .pipe(
       plumber( function(error) {
         gutil.log( gutil.colors.red(error.message) );
         this.emit( "end" );
       })
     )
+    .pipe( gulp.dest("./") )
     .pipe( livereload() );
 });
 
+gulp.task("templates-no-reload", function() {
+  return gulp.src("source/**/*.hbs")
+    .pipe(
+      plumber( function(error) {
+        gutil.log( gutil.colors.red(error.message) );
+        this.emit( "end" );
+      })
+    )
+    .pipe( gulp.dest("./") );
+});
+
 gulp.task("watch", function() {
-  // Watch stylesheets
-  gulp.watch("source/assets/stylesheets/*", ["build-stylesheets"]);
+  if (argv.path != undefined && argv.path != null && argv.path != '') {
+    gulp.watch([
+      "source/**/*.hbs",
+      "source/assets/stylesheets/**/*.scss",
+      "source/assets/stylesheets/**/*.sass",
+      "source/assets/javascripts/**/*.coffee",
+      "source/assets/javascripts/**/*.js",
+      "source/assets/images/*"
+    ]).on("change", function(file) {
+      var filename = file.path.replace(/^.*[\\\/]/, '')
+      var message = "Syncing " + filename + " - " + file.type;
+      gutil.log( gutil.colors.green(message) );
 
-  // Watch scripts
-  gulp.watch("source/assets/javascripts/*", ["build-javascripts"]);
+      gulp.src("source/**/*")
+        .pipe( gulp.dest(argv.path) );
+    });
+  } else {
+    // Watch stylesheets
+    gulp.watch("source/assets/stylesheets/*", ["build-stylesheets"]);
 
-  // Watch images
-  gulp.watch("source/assets/images/*", ["optimize-images"]);
+    // Watch scripts
+    gulp.watch("source/assets/javascripts/*", ["build-javascripts"]);
 
-  // Watch .hbs files
-  gulp.watch("*.hbs", ['templates']);
+    // Watch images
+    gulp.watch("source/assets/images/*", ["optimize-images"]);
 
+    // Watch .hbs files
+    gulp.watch("source/**/*.hbs", ['templates']);
 
-  var server = livereload();
-  gulp.watch("assets/**").on("change", function(file) {
-    server.changed(file.path);
-  });
+    var server = livereload();
+    gulp.watch("assets/**").on("change", function(file) {
+      server.changed(file.path);
+    });
+  }
 });
 
 gulp.task("ghost-server", function () {
@@ -110,5 +143,5 @@ gulp.task("run", function() {
 });
 
 gulp.task("default", ['clean'], function() {
-  gulp.start("build-stylesheets", "build-javascripts");
+  gulp.start("build-stylesheets", "build-javascripts", "templates-no-reload");
 });

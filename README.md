@@ -84,6 +84,11 @@ Watch for changes in js/css/images/templates and recompile on change
 gulp watch
 ```
 
+Watch for changes and sync to remote directory
+```
+gulp watch --path /Directory/Path/To/Remote
+```
+
 Start ghost server
 ```
 gulp ghost-server

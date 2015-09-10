@@ -50,33 +50,22 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     var baseDir = this.themeName;
-    this.mkdir( baseDir );
-
-    // Copy entire app dir to source
-    this.directory("app", baseDir + "/source");
 
     // folders
-    this.mkdir(baseDir+'/assets');
-    this.mkdir(baseDir+'/assets/stylesheets');
-    this.mkdir(baseDir+'/assets/javascripts');
-    this.mkdir(baseDir+'/assets/images');
-    this.mkdir(baseDir+'/partials');
+    this.mkdir(baseDir);
+    this.mkdir(baseDir + "/source");
 
-    // handlebars templates
-    this.copy("app/views/layout.hbs", baseDir + "/default.hbs");
-    this.copy("app/views/index.hbs", baseDir + "/index.hbs");
-    this.copy("app/views/post.hbs", baseDir + "/post.hbs");
-    this.copy("app/views/page.hbs", baseDir + "/page.hbs");
-    this.copy("app/views/tag.hbs", baseDir + "/tag.hbs");
-    this.copy("app/views/author.hbs", baseDir + "/author.hbs");
-    this.copy("app/views/partials/loop.hbs", baseDir + "/partials/loop.hbs");
-    this.copy("app/views/partials/navigation.hbs", baseDir + "/partials/navigation.hbs");
+    // Copy assets
+    this.directory("app/assets", baseDir + "/source/assets")
 
-    // Copy theme files
+    // Copy system files
     this.copy("app/gulpfile.js", baseDir + "/gulpfile.js");
     this.copy("app/package.json", baseDir + "/package.json");
     this.copy("app/bower.json", baseDir + "/bower.json");
     this.copy("app/.bowerrc", baseDir + "/.bowerrc");
+
+    // Copy views
+    this.directory("app/views", baseDir + "/source");
   },
 
   projectfiles: function () {
