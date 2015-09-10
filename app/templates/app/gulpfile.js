@@ -23,7 +23,7 @@ var env = new Mincer.Environment();
 env.appendPath("source/assets/javascripts");
 env.appendPath("source/assets/stylesheets");
 
-var argv = yargs.argv;\
+var argv = yargs.argv;
 
 gulp.task("clean", function() {
   return gulp.src(["assets/stylesheets/*", "assets/javascripts/*", "assets/images"], { read: false })
