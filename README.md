@@ -6,13 +6,9 @@ Allows generation of asset pipeline enabled Ghost theme development using Interf
 
 Ghost Manager is a ruby gem which was created to simplify Ghost installations and theme development. See the github page to learn more about it and how to leverage its power. https://github.com/CreateTheBridge/ghost-manager
 
+We recommend using Ghost Manager to do theme development with Ghost. It allows usage of SASS and CoffeScript, which is the preferred method of CSS/JS development.
+
 ## Installation
-
-### With Ghost Manager
-
-Coming soon
-
-### Without Ghost Manager
 
 Generate ghost theme in current directory
 ```
@@ -26,20 +22,14 @@ yo ghost-interface {{theme-name}}
 
 ## Usage
 
-### With Ghost Manager
-
-Coming soon
-
-### Without Ghost Manager
-
-First, generate the theme directory using:
+Generate the theme directory using:
 ```
-yo ghost-interface
+$ yo ghost-interface
 ```
 
-Copy theme folder into $GHOST_PATH/content/themes. To run the development server and use live reload, you'll need to develop from within a Ghost installation.
+Move into the theme directory
 ```
-cp -R {{ghost-theme-name}}/ $GHOST_PATH/content/themes/{{ghost-theme-name}} && cd $GHOST_PATH//content/themes/{{ghost-theme-name}}
+$ cd theme-name/
 ```
 
 Install required development dependencies
@@ -49,57 +39,47 @@ npm install
 
 Run the ghost server and watch for theme changes
 ```
-gulp run
+gulp server
 ```
 
-## Theme Commands
+## Gulp Commands
 
-Clears all compiled/minified assets
-```
-gulp clean
-```
+**Command**: gulp clean
 
-Build stylesheet assets
+**Description**: Cleans out the build/ directory
+
 ```
-gulp build-stylesheets
+$ gulp clean
 ```
 
-Build javascript assets
+**Command**: gulp rebuild
+
+**Description**: Recompiles SASS/CoffeeScript, optimizes images, copies all required files to the build/ directory. After build is complete, it rsyncs the content to the remote theme folder.
+
+**Arguments**:
++ (optional) --path {{path}} | Specifies the remote path which to sync the built theme files.
+
 ```
-gulp build-javascripts
+$ guild rebuild --path /Users/joshuat/Applications/Ghost/content/themes/magneto
 ```
 
-Optimize Images/SVGs
+**Command**: gulp server
+
+**Description**: Runs the Ghost server and watches the source files for changes.
+
+**Arguments**:
++ (optional) --ghost {{path}} | The absolute path of the ghost installation, assumes ../../../ if no path is specified
++ (optional) --path {{path}} | The remote path of the theme files to sync with.
+
 ```
-gulp optimize-images
+$ gulp server --ghost /Users/joshuat/Applications/Ghost --path /Users/joshuat/Applications/Ghost/content/themes/magneto
 ```
 
-Generate Favicon
-```
-gulp generate-favicon
-```
+## Contributing
 
-Watch for changes in js/css/images/templates and recompile on change
-```
-gulp watch
-```
+Bug reports and pull requests are welcome on GitHub at https://github.com/CreateTheBridge/generator-ghost-interface.
 
-Watch for changes and sync to remote directory
-```
-gulp watch --path /Directory/Path/To/Remote
-```
 
-Start ghost server
-```
-gulp ghost-server
-```
+## License
 
-Run the server and watch for asset changes
-```
-gulp run
-```
-
-Recompile and minify assets
-```
-gulp
-```
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
