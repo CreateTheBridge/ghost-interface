@@ -62,7 +62,7 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
     this.copy("app/gulpfile.js", baseDir + "/gulpfile.js");
     this.copy("app/package.json", baseDir + "/package.json");
     this.copy("app/bower.json", baseDir + "/bower.json");
-    this.copy("app/.bowerrc", baseDir + "/.bowerrc");
+    this.copy("app/bowerrc", baseDir + "/.bowerrc");
 
     // Copy views
     this.directory("app/views", baseDir + "/source");
@@ -71,7 +71,7 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
   projectfiles: function () {
     var baseDir = this.themeName;
 
-    this.copy("app/.gitignore", baseDir + "/.gitignore");
+    this.copy("app/gitignore", baseDir + "/.gitignore");
   }
 });
 
