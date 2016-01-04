@@ -6,6 +6,7 @@
     "font-awesome": "FortAwesome/Font-Awesome",
     "modular-scale": "~2.1.1",
     "normalize-css": "normalize.css#~3.0.3",
-    "susy": "~2.2.6"
+    "susy": "~2.2.6",
+    "jquery": "~2.1.4"
   }
 }

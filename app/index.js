@@ -10,6 +10,7 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
     yeoman.generators.Base.apply(this, arguments);
 
     this.argument('themeName', { type: String, required: false });
+    this.argument('buildDir', { type: String, required: false });
   },
 
   init: function () {
@@ -42,6 +43,10 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
 
       this.prompt(prompts, function (props) {
         this.themeName = props.themeName;
+        this.buildDir = path.resolve(props.themeName + "/content/themes/" + props.themeName);
+        console.log(this.buildDir);
+        // this.buildDir = path.resolve(props.buildDir.replace('*|THEME_NAME|*', props.themeName));
+        // this.serverDir = path.resolve(props.serverDir);
 
         done();
       }.bind(this));
@@ -50,15 +55,21 @@ var GhostInterfaceGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     var baseDir = this.themeName;
+    var buildDir = this.buildDir;
 
     // folders
     this.mkdir(baseDir);
+    this.mkdir(buildDir);
     this.mkdir(baseDir + "/source");
+    this.mkdir(baseDir + "/content/apps");
+    this.mkdir(baseDir + "/content/data");
+    this.mkdir(baseDir + "/content/images");
 
     // Copy assets
     this.directory("app/assets", baseDir + "/source/assets")
 
     // Copy system files
+    this.copy("app/content/data/ghost-dev.db", baseDir + "/content/data/ghost-dev.db");
     this.copy("app/gulpfile.js", baseDir + "/gulpfile.js");
     this.copy("app/package.json", baseDir + "/package.json");
     this.copy("app/bower.json", baseDir + "/bower.json");
