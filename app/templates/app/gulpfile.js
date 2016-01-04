@@ -105,13 +105,13 @@ gulp.task("stylesheets", ["nuke-stylesheets"], function() {
     .pipe( livereload() );
 });
 
-gulp.task("templates", ["nuke-templates", "favicons"], function() {
+gulp.task("templates", ["nuke-templates"], function() {
   return gulp.src("source/**/*.hbs")
     .pipe( gulp.dest(buildDirectory) )
     .pipe( livereload() );
 });
 
-gulp.task("images", ["nuke-images", "favicons"], function() {
+gulp.task("images", ["nuke-images"], function() {
   return gulp.src("source/assets/images/**")
     .pipe( gulp.dest(buildDirectory + "/assets/images") )
     .pipe( livereload() );
