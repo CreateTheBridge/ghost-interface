@@ -1,6 +1,6 @@
 {
   "name": "generator-ghost-interface",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Interface-based theme generator for Ghost Blogging Platform",
   "license": "MIT",
   "main": "app/index.js",
