@@ -4,7 +4,7 @@
   "description": "Interface-based theme generator for Ghost Blogging Platform",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "CreateTheBridge/ghost-interface-generator",
+  "repository": "CreateTheBridge/generator-ghost-interface",
   "author": {
     "name": "Joshua Tyree",
     "email": "joshuat@createthebridge.com",
